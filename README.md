@@ -27,10 +27,10 @@
 2. Make sure to use `POST` method
 4. Go to url: `http://project-name/disburse/store`
 3. Data attribute:
-  - `bank_code`
-  - `account_number`, must a number value
-  - `amount`, must a number value
-  - `remark`
+   - `bank_code`
+   - `account_number`, must a number value
+   - `amount`, must a number value
+   - `remark`
  
 Example:
 ```http
@@ -42,5 +42,6 @@ Content-Type: application/x-www-form-urlencoded
   "account_number": "987985165789"
   "amount": "1000000",
   "remark": "Sandi Sahdewo"
-}```
+}
+```
  
