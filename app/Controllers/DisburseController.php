@@ -1,26 +1,41 @@
 <?php
 
-class DisburseController extends BaseController {
+class DisburseController {
 
     protected $model;
 
-    protected $request;
+    protected $validation;
 
     public function __construct()
     {
-        parent::__construct();
         $this->model = new Disburse;
         $this->validation = new DisburseValidation;
     }
 
+    public function index()
+    {
+        echo json_encode([
+            'success' => [
+                'code' => 200,
+                'message' => 'welcome'
+            ]
+        ]);
+        exit();
+    }
+
     public function find($id)
     {
-        $api = json_decode($this->getApi('disburse/' . $id), true);
+        $api = json_decode(Api::get('disburse/' . $id), true);
 
         $disburse = $this->model->find($id);
 
         if($disburse['status'] != $api['status'] && $disburse['status'] != 'SUCCESS') {
-            $this->model->update($id, $api);
+            $updateData = [
+                'status' => $api['status'],
+                'receipt' => $api['receipt'],
+                'time_served' => $api['time_served']
+            ];
+            $this->model->update($id, $updateData);
         } 
 
         echo json_encode([
@@ -33,6 +48,8 @@ class DisburseController extends BaseController {
 
     public function store()
     {
+        Router::methodWant('POST');
+
         if($this->validation->runFails()) {
             echo json_encode([
                 'error' => [
@@ -43,7 +60,7 @@ class DisburseController extends BaseController {
             exit();
         }
 
-        $this->model->store($result = $this->postApi('disburse', $this->validation->validated()));
+        $this->model->store($result = Api::post('disburse', $this->validation->validated()));
 
         echo json_encode([
             'success' => [
@@ -51,5 +68,6 @@ class DisburseController extends BaseController {
                 'data' => $result
             ]
         ]);
+        exit();
     }
 }

@@ -1,0 +1,8 @@
+1. Routing
+2. Upload to github
+ - Copy this project to flip-backend
+ - And then, separate :
+    - Add autoload, router to call controller (.htaccess, index.php, a disburse controller)
+    - Model to save data to database, add validation (base model, a disburse model, rules, base validation, disburse validation)
+    - Connect controller with model, and create a dummy data (a disburse controller, a disburse model)
+    - Make curl to call an api (base controller, curl)

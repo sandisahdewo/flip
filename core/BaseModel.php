@@ -13,6 +13,18 @@ class BaseModel {
         $this->db = Config::pdoConnection();
     }
 
+    public function all()
+    {
+        $pdo = $this->db->prepare("SELECT * FROM $this->table");
+        $pdo->execute();
+
+        $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
+        if($result) 
+            return $result;
+
+        return;
+    }
+
     public function find($id)
     {
         $pdo = $this->db->prepare("SELECT * FROM $this->table WHERE $this->primaryKey = ?");
@@ -52,7 +64,7 @@ class BaseModel {
         }
         $queryColumns = implode(", ", $queryColumns);
 
-        $query .= "$queryColumns WHERE $this->primaryKey=:id";
+        $query .= "$queryColumns WHERE $this->primaryKey=:$this->primaryKey";
         $data = array_merge($data, [$this->primaryKey => $id]);
 
         try {
@@ -61,5 +73,14 @@ class BaseModel {
             echo $e->getMessage();
             exit();
         }
+    }
+
+    public function delete($id)
+    {
+        $pdo = $this->db->prepare("DELETE FROM $this->table WHERE $this->primaryKey = ?");
+        $pdo->bindValue(1, $id);
+        $pdo->execute();
+
+        return true;
     }
 }
