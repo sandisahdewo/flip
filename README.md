@@ -39,7 +39,7 @@ Content-Type: application/x-www-form-urlencoded
  
 {
   "bank_code": "bca",
-  "account_number": "987985165789"
+  "account_number": "987985165789",
   "amount": "1000000",
   "remark": "Sandi Sahdewo"
 }
