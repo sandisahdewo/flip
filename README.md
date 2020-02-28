@@ -26,9 +26,9 @@
 
 ### Request
 1. Use a API client application, for example: `Postman` or `REST Client`
-2. Make sure to use `POST` method
-4. Go to url: `http://localhost:8000/disburse/store`
-3. Data attribute:
+2. Go to url: `http://localhost:8000/disburse/store`
+3. Make sure to use `POST` method
+4. Data attribute:
    - `bank_code`
    - `account_number`, must a number value
    - `amount`, must a number value
@@ -49,23 +49,54 @@ Content-Type: application/x-www-form-urlencoded
  ### Response
  ```
  {"success":
-      {
-        "code":"200",
-        "data": {
-                  "id":5599181191,
-                  "amount":100000,
-                  "status":"PENDING",
-                  "timestamp":"2020-02-27 22:12:03",
-                  "bank_code":"bca",
-                  "account_number":"1234567890",
-                  "beneficiary_name":"PT FLIP",
-                  "remark":"Sandi Sahdewo",
-                  "receipt":null,
-                  "time_served":"0000-00-00 00:00:00",
-                  "fee":4000
-                }
-      }
+       {
+          "code":"200",
+          "data": {
+                      "id":5599181191,
+                      "amount":100000,
+                      "status":"PENDING",
+                      "timestamp":"2020-02-27 22:12:03",
+                      "bank_code":"bca",
+                      "account_number":"1234567890",
+                      "beneficiary_name":"PT FLIP",
+                      "remark":"Sandi Sahdewo",
+                      "receipt":null,
+                      "time_served":"0000-00-00 00:00:00",
+                      "fee":4000
+                  }
+         }
  }
 ```
 
 ## Get a Disbursement status:
+
+### Request
+1. Go to url: `http://localhost:8000/disburse/find/{id}`
+
+Example:
+```http
+GET http://localhost:8000/disburse/find/5599181191
+Content-Type: application/x-www-form-urlencoded
+```
+
+### Response
+```
+ {"success":
+       {
+          "code":"200",
+          "data": {
+                      "id":5599181191,
+                      "amount":100000,
+                      "status":"SUCCESS",
+                      "timestamp":"2020-02-27 22:12:03",
+                      "bank_code":"bca",
+                      "account_number":"1234567890",
+                      "beneficiary_name":"PT FLIP",
+                      "remark":"Sandi Sahdewo",
+                      "receipt": "https://flip-receipt.oss-ap-southeast-5.aliyuncs.c...",
+                      "time_served":"2020-02-27 22:14:53",
+                      "fee":4000
+                  }
+         }
+ }
+```
