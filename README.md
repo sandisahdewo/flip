@@ -16,7 +16,7 @@
 1. Clone the repo : `git clone https://github.com/sandiwo/flip.git`
 2. `$ cd flip`
 3. Create new MySQL database for this application
-4. Set database configuration on `app > config > database.php` file
+4. Set database configuration on `config > database.php` file
 5. `$ php migration-up.php`
 6. `$ php -S localhost:8000`
 7. Visit `http://localhost:8000/disburse` via web browser
